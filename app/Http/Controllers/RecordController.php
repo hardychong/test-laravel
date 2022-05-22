@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Account;
 use App\Models\Record;
-use Illuminate\Http\Request;
+use App\Http\Requests\Request;
+use App\Http\Requests\StoreRecordRequest;
+use App\Http\Requests\UpdateRecordRequest;
+use App\Models\Account;
 
 class RecordController extends Controller
 {
@@ -14,8 +16,7 @@ class RecordController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
-        //
+    {        
 		return view('record.index' , ['records' => Record::orderBy('date','desc')->paginate(10)]);
     }
 
@@ -26,26 +27,31 @@ class RecordController extends Controller
      */
     public function create()
     {
-        //
 		return view('record.create_edit' , ['accounts' => Account::select('id','name')->get()]);
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\StoreRecordRequest  $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
-        //
-		foreach ($request->record as $record )
+		$request->validate([
+			'records.*.date' => 'required',
+			'records.*.acc_id' => 'required',
+			'records.*.currency' => 'required',
+			'records.*.amount' => 'required',			
+		]);
+		
+		foreach ($request->records as $record )
 		{	
 			$data = new Record;
 			$data->account_id = $record['acc_id'];
 			$data->date = $record['date'];
 			$data->currency = $record['currency'];
-			$data->amount = $record['in']-$record['out'];
+			$data->amount = $record['amount'];
 			$data->save();
 		}	
 		
@@ -78,11 +84,11 @@ class RecordController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\UpdateRecordRequest  $request
      * @param  \App\Models\Record  $record
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Record $record)
+    public function update(UpdateRecordRequest $request, Record $record)
     {
         //
     }

@@ -8,8 +8,15 @@
 	
 	<body>
 		<div class="container">
+			<h2>Index</h2>
 			<a href="accounts">Account</a>
 			<a href="records">Record</a>
+			<a href="av-actress">AV Actress</a>
+			<hr>
+			<h2>Create</h2>
+			<a href="accounts/create">Account</a>
+			<a href="records/create">Record</a>
+			<a href="av-actress/create">AV Actress</a>
 		</div>
 	</body>
 </html>

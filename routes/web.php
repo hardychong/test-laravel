@@ -1,10 +1,6 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\AccountController;
-use App\Http\Controllers\RecordController;
-
-
 
 /*
 |--------------------------------------------------------------------------
@@ -22,6 +18,10 @@ Route::get('/', function () {
 });
 
 Route::resources([
-	'accounts' => AccountController::class,
-	'records' => RecordController::class,
+	'accounts' 		=> App\Http\Controllers\AccountController::class,
+	'records' 		=> App\Http\Controllers\RecordController::class,
+	'av-actress'	=> App\Http\Controllers\AvActressController::class,
 ]);
+
+Route::get('/student-form' , [StudentController::class , 'index']);
+Route::post('/store-input-fields' , [StudentController::class , 'store']);
