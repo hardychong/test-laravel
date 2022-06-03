@@ -17,7 +17,7 @@ class AvActressController extends Controller
 	 
     public function index()
     {
-        return view('avActress/index' , ['avActresses' => AvActress::paginate(20)]);
+        return view('av.actress_index' , ['avActresses' => AvActress::paginate(20)]);
     }
 
     /**
@@ -27,7 +27,7 @@ class AvActressController extends Controller
      */
     public function create()
     {
-        return view('avActress/create_edit' , ['avActress' => new AvActress]);
+        return view('av.actress_create_edit' , ['avActress' => new AvActress]);
     }
 
     /**
@@ -62,7 +62,7 @@ class AvActressController extends Controller
      */
     public function show(AvActress $avActress)
     {
-        //
+        return view('av.actress_show',['actress' => $avActress]);
     }
 
     /**

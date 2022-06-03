@@ -21,6 +21,7 @@ Route::resources([
 	'accounts' 		=> App\Http\Controllers\AccountController::class,
 	'records' 		=> App\Http\Controllers\RecordController::class,
 	'av-actress'	=> App\Http\Controllers\AvActressController::class,
+	'av-videos'		=> App\Http\Controllers\AvVideoController::class,
 ]);
 
 Route::get('/student-form' , [StudentController::class , 'index']);
